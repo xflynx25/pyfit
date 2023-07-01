@@ -21,7 +21,7 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/xflynx25/pyfit/issues"
     },
     license='GNU',
-    packages=['pyfit'],
+    #packages=['pyfit'],
     install_requires=[],
 )
 
