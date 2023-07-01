@@ -1,0 +1,5 @@
+0. Remember, conda environment is conda create -name __envname__
+1. pip install git+https://github.com/xflynx25/pyfit.git to get the module in environment
+2. Use "pip freeze > requirements.txt" and then include this in the setup.py file for auto-install packages. Conda fills with local versions, so need to go back in and edit. 
+3. Need to put __init__.py in every directory
+4. git add *, git add -u, git commit -m "", git push origin main 
