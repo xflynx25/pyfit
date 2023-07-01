@@ -22,7 +22,7 @@ setuptools.setup(
     },
     license='GNU',
     #packages=['pyfit'],
-    install_requires=[],
+    #install_requires=[],
 )
 
 from setuptools import setup, find_packages
