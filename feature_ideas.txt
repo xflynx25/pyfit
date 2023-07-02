@@ -1,0 +1,5 @@
+7/2/23 (LONG-TERM) (MEDIUM-LENGTH) - Create tags (versions) with full documentation, tar/zip and all, to do legitimate installs
+7/2/23 (SHORT-TERM) (MEDIUM-LENGTH) - Wrappers around common visualizer tasks: heat maps, motion plots, difference plots, confusion matrix, hyperparameter topology
+7/2/23 (SHORT-TERM) (MEDIUM-LENGTH) - Dataset classes, get dataloaders and other useful objects for different data types
+7/2/23 (SHORT-TERM) (SHORT-LENGTH) - Minimal model interfaces just for testing datasets and visualizations
+7/2/23 (MEDIUM-TERM) (LONG-LENGTH) - Good interfaces for interacting with different types of models
