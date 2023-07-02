@@ -24,8 +24,8 @@ CORE AND LIB
 
 from . import core
 from .core import *
-from . import lib
-from .lib import *
+from . import my_lib
+from .my_lib import *
 
 
 """
