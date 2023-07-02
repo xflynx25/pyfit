@@ -12,7 +12,7 @@ class Gen():
         if style == 'random': 
             self.data = [[1,2],[2,3]]
         else:
-            self.data = "your mom"
+            self.data = "something nice"
 
     def __str__(self) -> str:
         return str(self.data)
