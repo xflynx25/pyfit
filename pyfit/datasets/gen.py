@@ -1,5 +1,7 @@
 import numpy as np 
 
+__all__ = ['Gen']
+
 # generate dataset for practicing machine learning tasks for different types of hoped for data
 class Gen():
     def __init__(self) -> None:
