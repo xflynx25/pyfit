@@ -5,3 +5,4 @@
 4. git add *, git add -u, git commit -m "", git push origin main ;; git commit -am "ENH: Some message" is actually faster and equiv
 5. we will try to write like numpy, with its singularly subdirectory structure, and init structure, possibly combined with matplotlib environment class structure
 6. _variable means that the variable is not meant to be accessed. 
+7. local testing before github via simply python and imports in same dir 

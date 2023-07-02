@@ -37,3 +37,5 @@ from . import datasets
 from . import visualization
 from . import nn
 from . import rf
+
+hello_world()
