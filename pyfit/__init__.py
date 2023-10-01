@@ -37,5 +37,8 @@ from . import datasets
 from . import visualization
 from . import nn
 from . import rf
+from . import dev
 
 hello_world()
+dev.lab.hello_worldy()
+dev.hello_worldy()

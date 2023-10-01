@@ -40,3 +40,4 @@ class DataGen:
         X = np.random.random((n_samples, n_features))
         y = np.random.randint(0, 2, n_samples)
         return X, y
+ 
