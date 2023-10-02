@@ -3,3 +3,6 @@ This acts as a root directory for the model building functionality implementatio
 """
 
 from . import lab
+
+
+from . import semiautomatic
