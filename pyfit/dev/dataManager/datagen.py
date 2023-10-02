@@ -63,6 +63,31 @@ class DataGen:
         X = np.random.random((n_samples, n_features))
         y = np.random.randint(0, 2, n_samples)
         return X, y
+    
+    def make_trashy_data(self, **kwargs):
+        """
+        Generate dataset with duplicates and null values.
+        """
+        n_samples = kwargs.get('n_samples') or self.n_samples
+        n_features = kwargs.get('n_features') or self.n_features
+
+        # Generate random data
+        X = np.random.random((n_samples, n_features))
+        y = np.random.randint(0, 2, n_samples)
+
+        # Introduce null values
+        nan_rate = kwargs.get('nan_rate', 0.1)  # 10% of the data will be NaN by default
+        nan_mask = np.random.choice([True, False], size=X.shape, p=[nan_rate, 1 - nan_rate])
+        X[nan_mask] = np.nan
+
+        # Introduce duplicates
+        dup_rate = kwargs.get('dup_rate', 0.1)  # 10% of the data will be duplicates by default
+        n_dups = int(n_samples * dup_rate)
+        dup_indices = np.random.choice(n_samples, n_dups)
+        X[dup_indices] = X[dup_indices - 1]  # Copy data from previous row to create duplicate
+        y[dup_indices] = y[dup_indices - 1]  # Do the same for target variable
+
+        return X, y
 
     def make_data(self, style: str, *args, **kwargs):
         if hasattr(self, f"make_{style}"):

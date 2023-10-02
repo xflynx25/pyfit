@@ -8,11 +8,12 @@ from .datagen import DataGen
 # probably, seperate, because you might have diff features and stuff
 # and maybe one model to predict many things, so 
 class DataManager:
-    def __init__(self, working_directory, project_name = "default"):
+    def __init__(self, working_directory, project_name = "default", target_column='target'):
         self.working_directory = working_directory
         self.datasets_directory = os.path.join(working_directory, 'datasets')
         self._init_directories()
         self.project_name = project_name
+        self.target_column = target_column
 
         self.raw_data_path = None 
         self.active_data_path = None  # Initialize with no active dataset
@@ -38,6 +39,17 @@ class DataManager:
 
         self.active_data_path = file_path
 
+
+    @property
+    def target_column(self):
+        return self._target_column
+    
+    @target_column.setter
+    def target_column(self, column_name):
+        if not isinstance(column_name, str):
+            raise ValueError("Target column name must be a string.")
+        self._target_column = column_name
+
     def load_active_dataset(self):
         """
         Load the dataset that is set as active.
@@ -46,6 +58,7 @@ class DataManager:
             raise ValueError("No active dataset set. Set an active dataset first.")
         self.active_dataset = pd.read_csv(self.active_data_path)
         return self.active_dataset
+    
     def get_data_head(self, n=5):
         """
         Get the head of the active dataset.
@@ -62,9 +75,31 @@ class DataManager:
         data_gen = DataGen()
         X, y = data_gen.make_data(dataset_name, **kwargs) #calls if relevant
         df = pd.DataFrame(X)
-        df['target'] = y #shouldn't do this, rather, should have a malleable attribute that says what the target column is
+        df[self.target_column] = y 
         self.active_data_path = os.path.join(self.datasets_directory, f"db_{self.project_name}_raw.csv")
         df.to_csv(self.active_data_path, index=False)
+
+    def get_X(self):
+        """
+        Get the feature matrix (X) from the active dataset.
+        """
+        if self.active_dataset is None:
+            self.load_active_dataset()
+        if self.target_column not in self.active_dataset.columns:
+            raise ValueError(f"Target column {self.target_column} not found in active dataset")
+        X = self.active_dataset.drop(columns=[self.target_column])
+        return X
+
+    def get_Y(self):
+        """
+        Get the target variable (Y) from the active dataset.
+        """
+        if self.active_dataset is None:
+            self.load_active_dataset()
+        if self.target_column not in self.active_dataset.columns:
+            raise ValueError(f"Target column {self.target_column} not found in active dataset")
+        Y = self.active_dataset[self.target_column]
+        return Y
 
     def save_processed_data(self, data, name):
         """

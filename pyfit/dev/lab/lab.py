@@ -9,6 +9,7 @@ from ..eda import EDA
 from ..transformer import Transformer
 from ..model import ModelInterface
 from ..comparator import Comparator
+from .. import dev_helpers
 
 
 class Lab:
@@ -17,20 +18,15 @@ class Lab:
         Initialize the Lab with a specified working directory.
         """
         self.working_directory = working_directory
-        self._init_directories()
+        dev_helpers.init_directories(working_directory)
         
         self.data_manager = DataManager(working_directory)
 
 
-        self.eda = EDA(working_directory)
         self.transformer = Transformer(working_directory)
         self.model_interface = ModelInterface(working_directory)
         self.comparator = Comparator(working_directory)
         print('init lab')
-
-    def _init_directories(self):
-        if not os.path.exists(self.working_directory):
-            os.makedirs(self.working_directory)
 
     def load_data(self, file_path=None):
         """
@@ -66,8 +62,11 @@ class Lab:
         """
         Perform exploratory data analysis using EDA object.
         """
-        # Implementation here
-    
+        X = self.data_manager.get_X()
+        Y = self.data_manager.get_Y()
+        self.eda = EDA(self.working_directory, X, Y)
+        self.eda.default_eda()
+
     def transform_data(self):
         """
         Transform data using Transformer object.
