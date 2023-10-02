@@ -2,6 +2,8 @@
 
 __all__ = ['Lab']
 
+import os
+
 from ..dataManager import DataManager
 from ..eda import EDA
 from ..transformer import Transformer
@@ -15,21 +17,44 @@ class Lab:
         Initialize the Lab with a specified working directory.
         """
         self.working_directory = working_directory
-
-
+        self._init_directories()
         
         self.data_manager = DataManager(working_directory)
+
+
         self.eda = EDA(working_directory)
         self.transformer = Transformer(working_directory)
         self.model_interface = ModelInterface(working_directory)
         self.comparator = Comparator(working_directory)
         print('init lab')
-    
+
+    def _init_directories(self):
+        if not os.path.exists(self.working_directory):
+            os.makedirs(self.working_directory)
+
     def load_data(self, file_path=None):
         """
-        Load data using DataManager. If file_path is None, prompt the user for input.
+        If file_path is provided, load data from it; otherwise, generate data.
         """
-        # Implementation here
+        if file_path:
+            # Load data from file_path
+            pass
+        else:
+            # Call self.data_manager.generate_data() with the appropriate parameters
+            pass
+
+    def seed_data(self, dataset_name, **kwargs):
+        """
+        Seed data by generating synthetic data or loading a common dataset, then save it.
+        """
+        self.data_manager.generate_data(dataset_name, **kwargs)
+
+    def show_data_head(self, n=5):
+        """
+        Display the head of the active dataset.
+        """
+        return self.data_manager.get_data_head(n)
+    
     
     def preprocess_data(self):
         """
